@@ -6,15 +6,18 @@ import dynamic from "next/dynamic";
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import {
   ArrowUp,
+  Bot,
   ChevronDown,
   ExternalLink,
   Filter,
   Mail,
+  MessageCircle,
   Menu,
   Moon,
   Phone,
   Search,
   Send,
+  Sparkles,
   Sun,
   X
 } from "lucide-react";
@@ -617,6 +620,206 @@ function GalleryFaq() {
   );
 }
 
+type ChatMessage = {
+  role: "assistant" | "user";
+  text: string;
+};
+
+const assistantStarters = [
+  "How can I request a quotation?",
+  "What is the MOQ?",
+  "Do you provide samples?",
+  "Which documents are supported?"
+];
+
+const initialAssistantMessages: ChatMessage[] = [
+  {
+    role: "assistant",
+    text: "Hello, I am the PatanA5Traders AI Trade Desk. Ask about products, MOQ, samples, packaging, shipping, documents, countries, or quotation details."
+  }
+];
+
+function getAssistantResponse(input: string) {
+  const message = input.toLowerCase();
+
+  if (/(quote|quotation|price|rate|cost|offer)/.test(message)) {
+    return "For a quotation, please share product name, quantity, destination country/port, packaging preference, required timeline, and your company details. You can send this through the contact form, WhatsApp, or email.";
+  }
+
+  if (/(moq|minimum|quantity)/.test(message)) {
+    return "MOQ depends on the product, grade, packaging, supplier availability, and shipping mode. PatanA5Traders can discuss flexible quantities based on your buyer requirement.";
+  }
+
+  if (/(sample|samples)/.test(message)) {
+    return "Yes, product samples can be arranged before bulk order confirmation. Sampling depends on product type, availability, courier rules, and buyer destination.";
+  }
+
+  if (/(product|rice|spice|spices|oil|fruit|fruits|vegetable|vegetables)/.test(message)) {
+    return "PatanA5Traders supports rice, spices, edible cooking oil, fresh fruits, vegetables, and other buyer-specified Indian products with sourcing, packaging, and export documentation support.";
+  }
+
+  if (/(document|customs|certificate|iec|gst|fssai|apeda|packing list|invoice)/.test(message)) {
+    return "Documentation support can include invoice, packing list, export paperwork, customs coordination, inspection-related documents, and product-specific compliance documents where applicable.";
+  }
+
+  if (/(ship|shipping|logistic|freight|delivery|\bport\b|\bports\b|container|sea)/.test(message)) {
+    return "Shipping time and freight cost depend on destination, shipment size, freight mode, port schedule, customs process, and documentation readiness. Sea freight and door-to-door coordination can be supported.";
+  }
+
+  if (/(pack|packaging|private label|label|brand)/.test(message)) {
+    return "Custom packaging and private-label options can be discussed based on product type, MOQ, buyer design, food-grade requirements, and supplier capability.";
+  }
+
+  if (/(country|countries|uae|usa|uk|singapore|saudi|qatar|oman|kuwait|africa|asia)/.test(message)) {
+    return "PatanA5Traders focuses on India, UAE, USA, UK, Singapore, Saudi Arabia, Qatar, Oman, Kuwait, wider Asia, and Africa. Other destinations can be reviewed case by case.";
+  }
+
+  if (/(payment|pay|secure|bank|advance)/.test(message)) {
+    return "Payment terms are discussed case by case for B2B trade. Secure international payment methods are preferred, and terms depend on buyer profile, order value, product, and shipment plan.";
+  }
+
+  return "I can help with products, MOQ, samples, packaging, shipping, documentation, countries served, and quotation requirements. For an exact answer, share the product, quantity, destination country, and packaging preference.";
+}
+
+function AssistantChat({ compact = false }: { compact?: boolean }) {
+  const [messages, setMessages] = useState<ChatMessage[]>(initialAssistantMessages);
+  const [input, setInput] = useState("");
+
+  function askAssistant(text: string) {
+    const clean = text.trim();
+    if (!clean) return;
+
+    const reply = getAssistantResponse(clean);
+    setMessages((current) => [
+      ...current,
+      { role: "user", text: clean },
+      { role: "assistant", text: reply }
+    ]);
+    setInput("");
+  }
+
+  const lastUserMessage = [...messages].reverse().find((message) => message.role === "user")?.text ?? "";
+  const encodedInquiry = encodeURIComponent(
+    lastUserMessage || "Hello PatanA5Traders, I need help with an import-export enquiry."
+  );
+
+  return (
+    <div className={cn("premium-panel rounded-[8px] p-4 dark:border-white/10 dark:bg-white/5", compact ? "w-full" : "p-6")}>
+      <div className="flex items-center gap-3 border-b border-slate-200 pb-4 dark:border-white/10">
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gradient-to-r from-gold-500 to-gold-300 text-navy-950 shadow-gold">
+          <Bot className="h-6 w-6" />
+        </span>
+        <span>
+          <span className="block font-bold text-navy-900 dark:text-white">AI Trade Desk</span>
+          <span className="block text-sm text-slate-500 dark:text-slate-300">Instant enquiry guidance</span>
+        </span>
+      </div>
+
+      <div className={cn("mt-4 space-y-3 overflow-y-auto pr-1", compact ? "max-h-72" : "max-h-96")}>
+        {messages.map((message, index) => (
+          <div
+            key={`${message.role}-${index}`}
+            className={cn(
+              "rounded-[8px] px-4 py-3 text-sm leading-6",
+              message.role === "assistant"
+                ? "mr-6 bg-navy-950 text-white dark:bg-white/10"
+                : "ml-6 bg-gold-100 text-navy-950 dark:bg-gold-300"
+            )}
+          >
+            {message.text}
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-4 flex flex-wrap gap-2">
+        {assistantStarters.map((starter) => (
+          <button
+            key={starter}
+            type="button"
+            onClick={() => askAssistant(starter)}
+            className="focus-ring rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-700 transition hover:border-gold-300 hover:text-navy-900 dark:border-white/10 dark:bg-white/10 dark:text-slate-200"
+          >
+            {starter}
+          </button>
+        ))}
+      </div>
+
+      <form
+        className="mt-4 flex gap-2"
+        onSubmit={(event) => {
+          event.preventDefault();
+          askAssistant(input);
+        }}
+      >
+        <input
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
+          placeholder="Ask about products, MOQ, shipping..."
+          className="focus-ring min-w-0 flex-1 rounded-full border border-slate-200 bg-white px-4 py-3 text-sm text-navy-900 dark:border-white/10 dark:bg-navy-950 dark:text-white"
+        />
+        <button
+          type="submit"
+          className="focus-ring grid h-12 w-12 shrink-0 place-items-center rounded-full bg-gradient-to-r from-gold-500 to-gold-300 text-navy-950 shadow-gold"
+          aria-label="Ask AI assistant"
+        >
+          <Send className="h-5 w-5" />
+        </button>
+      </form>
+
+      <div className="mt-4 grid gap-2 sm:grid-cols-2">
+        <a
+          href={`https://wa.me/91${company.whatsapp}?text=${encodedInquiry}`}
+          target="_blank"
+          rel="noreferrer"
+          className="focus-ring inline-flex items-center justify-center gap-2 rounded-full border border-green-500 px-4 py-3 text-sm font-bold text-green-700 transition hover:bg-green-500 hover:text-white dark:text-green-300"
+        >
+          <MessageCircle className="h-4 w-4" />
+          WhatsApp Team
+        </a>
+        <a
+          href={`mailto:${company.email}?subject=Import%20Export%20Inquiry&body=${encodedInquiry}`}
+          className="focus-ring inline-flex items-center justify-center gap-2 rounded-full border border-navy-900 px-4 py-3 text-sm font-bold text-navy-900 transition hover:bg-navy-900 hover:text-white dark:border-white dark:text-white"
+        >
+          <Mail className="h-4 w-4" />
+          Email Inquiry
+        </a>
+      </div>
+    </div>
+  );
+}
+
+function AiTradeAssistant() {
+  return (
+    <section id="ai-assistant" className="section relative overflow-hidden bg-navy-950 text-white">
+      <div className="hero-grid absolute inset-0 opacity-35" />
+      <div className="container relative grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
+          <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-gold-300/40 bg-white/10 px-4 py-2 text-sm font-bold uppercase tracking-[0.18em] text-gold-300 backdrop-blur">
+            <Sparkles className="h-4 w-4" />
+            AI Enquiry Assistant
+          </p>
+          <h2 className="font-display text-3xl font-bold md:text-5xl">Clarify buyer doubts instantly.</h2>
+          <div className="gold-line my-5" />
+          <p className="max-w-xl leading-8 text-slate-200">
+            A professional trade assistant helps visitors understand products, MOQ, samples, packaging, shipping,
+            documentation, countries served, and quotation requirements before they contact the team.
+          </p>
+          <div className="mt-7 grid gap-3 sm:grid-cols-2">
+            {["Instant enquiry guidance", "Quote-ready details", "WhatsApp handoff", "Professional buyer support"].map((item) => (
+              <div key={item} className="rounded-[8px] border border-white/10 bg-white/10 px-4 py-3 font-bold text-slate-100 backdrop-blur">
+                {item}
+              </div>
+            ))}
+          </div>
+        </motion.div>
+        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
+          <AssistantChat />
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 function Contact() {
   return (
     <section id="contact" className="section bg-white dark:bg-navy-950">
@@ -826,6 +1029,49 @@ function FloatingActions() {
   );
 }
 
+function FloatingAiAssistant() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="fixed bottom-5 left-5 z-40">
+      {open && (
+        <motion.div
+          initial={{ opacity: 0, y: 18, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          className="mb-4 w-[min(390px,calc(100vw-32px))] overflow-hidden rounded-[8px] border border-white/10 bg-white shadow-premium dark:bg-navy-950"
+        >
+          <div className="flex items-center justify-between bg-navy-950 px-4 py-3 text-white">
+            <span className="inline-flex items-center gap-2 font-bold">
+              <Bot className="h-5 w-5 text-gold-300" />
+              AI Trade Desk
+            </span>
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="focus-ring grid h-9 w-9 place-items-center rounded-full bg-white/10"
+              aria-label="Close AI assistant"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+          <AssistantChat compact />
+        </motion.div>
+      )}
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        className="focus-ring inline-flex h-14 items-center gap-3 rounded-full bg-navy-950 px-5 font-bold text-white shadow-premium transition hover:-translate-y-1 dark:bg-white dark:text-navy-950"
+        aria-label="Open AI enquiry assistant"
+      >
+        <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-r from-gold-500 to-gold-300 text-navy-950">
+          <Sparkles className="h-5 w-5" />
+        </span>
+        AI Help
+      </button>
+    </div>
+  );
+}
+
 export function SiteClient() {
   return (
     <>
@@ -838,10 +1084,12 @@ export function SiteClient() {
         <TrustSections />
         <MarketsAndProcess />
         <GalleryFaq />
+        <AiTradeAssistant />
         <Contact />
         <BusinessCardSection />
       </main>
       <Footer />
+      <FloatingAiAssistant />
       <FloatingActions />
     </>
   );

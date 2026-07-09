@@ -42,6 +42,7 @@ export const navItems = [
   { label: "Products", href: "#products" },
   { label: "Services", href: "#services" },
   { label: "Markets", href: "#markets" },
+  { label: "AI Help", href: "#ai-assistant" },
   { label: "Contact", href: "#contact" }
 ];
 

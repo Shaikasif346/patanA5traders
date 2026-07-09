@@ -6,7 +6,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
     <div className="flex items-center gap-3" aria-label={`${company.name} logo`}>
       <div className="relative h-12 w-12 overflow-hidden rounded-full border border-gold-300/70 bg-white shadow-gold">
         <Image
-          src="/brand/a5-logo.jpeg"
+          src="/brand/a5-logo.png"
           alt="A5 Traders logo"
           fill
           sizes="48px"

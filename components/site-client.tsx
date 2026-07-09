@@ -723,10 +723,10 @@ function BusinessCardSection() {
             PatanA5Traders business card
           </h2>
           <Image
-            src="/brand/a5-business-card.jpeg"
+            src="/brand/a5-business-card.png"
             alt="Patan Mahaboob Subhani Founder and Owner business card for A5 Traders"
-            width={1600}
-            height={954}
+            width={1661}
+            height={947}
             className="h-auto w-full rounded-[6px]"
             sizes="(min-width: 1024px) 960px, calc(100vw - 48px)"
           />

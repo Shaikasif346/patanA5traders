@@ -177,13 +177,22 @@ function Header() {
 
 function Hero() {
   return (
-    <section id="home" className="iridescent-shell relative min-h-[92vh] overflow-hidden bg-navy-950 pt-20 text-white">
-      <div className="iridescent-field opacity-95" aria-hidden="true" />
+    <section id="home" className="relative min-h-[92vh] overflow-hidden bg-navy-950 pt-20 text-white">
+      <Image
+        src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=2200&q=85"
+        alt="International cargo port with shipping containers"
+        fill
+        priority
+        className="object-cover opacity-40"
+        sizes="100vw"
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,18,37,0.96),rgba(4,18,37,0.78),rgba(4,18,37,0.32))]" />
       <div className="hero-grid absolute inset-0 opacity-70" />
-      <div className="absolute inset-y-20 right-0 z-10 hidden w-[58vw] xl:block">
+      <div className="absolute -right-24 top-24 hidden h-[620px] w-[620px] rounded-full border border-gold-300/20 bg-gold-300/10 blur-3xl xl:block" />
+      <div className="absolute inset-y-20 right-0 hidden w-[58vw] xl:block">
         <TradeScene />
       </div>
-      <div className="container relative z-10 grid min-h-[calc(92vh-80px)] items-center gap-10 py-16 xl:grid-cols-[0.92fr_1.08fr]">
+      <div className="container relative grid min-h-[calc(92vh-80px)] items-center gap-10 py-16 xl:grid-cols-[0.92fr_1.08fr]">
         <motion.div
           initial={{ opacity: 0, y: 34 }}
           animate={{ opacity: 1, y: 0 }}
@@ -786,10 +795,9 @@ function AssistantChat({ compact = false }: { compact?: boolean }) {
 
 function AiTradeAssistant() {
   return (
-    <section id="ai-assistant" className="section iridescent-shell relative overflow-hidden bg-navy-950 text-white">
-      <div className="iridescent-field opacity-60" aria-hidden="true" />
+    <section id="ai-assistant" className="section relative overflow-hidden bg-navy-950 text-white">
       <div className="hero-grid absolute inset-0 opacity-35" />
-      <div className="pointer-events-none absolute inset-y-10 right-0 z-10 hidden w-[48vw] opacity-55 xl:block">
+      <div className="pointer-events-none absolute inset-y-10 right-0 hidden w-[48vw] opacity-55 xl:block">
         <GridScan
           sensitivity={0.48}
           lineThickness={1}
@@ -811,7 +819,7 @@ function AiTradeAssistant() {
           noiseIntensity={0.008}
         />
       </div>
-      <div className="container relative z-10 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+      <div className="container relative grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
         <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-gold-300/40 bg-white/10 px-4 py-2 text-sm font-bold uppercase tracking-[0.18em] text-gold-300 backdrop-blur">
             <Sparkles className="h-4 w-4" />

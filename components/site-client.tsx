@@ -45,6 +45,11 @@ const TradeScene = dynamic(() => import("./trade-scene").then((mod) => mod.Trade
   loading: () => <div className="h-full w-full bg-transparent" />
 });
 
+const GridScan = dynamic(() => import("./grid-scan").then((mod) => mod.GridScan), {
+  ssr: false,
+  loading: () => <div className="h-full w-full bg-transparent" />
+});
+
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   show: { opacity: 1, y: 0 }
@@ -792,6 +797,28 @@ function AiTradeAssistant() {
   return (
     <section id="ai-assistant" className="section relative overflow-hidden bg-navy-950 text-white">
       <div className="hero-grid absolute inset-0 opacity-35" />
+      <div className="pointer-events-none absolute inset-y-10 right-0 hidden w-[48vw] opacity-55 xl:block">
+        <GridScan
+          sensitivity={0.48}
+          lineThickness={1}
+          linesColor="#F6D36B"
+          gridScale={0.08}
+          lineJitter={0.08}
+          scanColor="#D4A017"
+          scanOpacity={0.55}
+          scanDirection="pingpong"
+          scanGlow={0.75}
+          scanSoftness={2.4}
+          scanDuration={2.8}
+          scanDelay={1.1}
+          enablePost
+          bloomIntensity={0.32}
+          bloomThreshold={0.02}
+          bloomSmoothing={0.18}
+          chromaticAberration={0.0015}
+          noiseIntensity={0.008}
+        />
+      </div>
       <div className="container relative grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
         <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
           <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-gold-300/40 bg-white/10 px-4 py-2 text-sm font-bold uppercase tracking-[0.18em] text-gold-300 backdrop-blur">
@@ -812,7 +839,29 @@ function AiTradeAssistant() {
             ))}
           </div>
         </motion.div>
-        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="relative"
+        >
+          <div className="pointer-events-none absolute -inset-4 opacity-35 xl:hidden">
+            <GridScan
+              sensitivity={0.42}
+              lineThickness={1}
+              linesColor="#F6D36B"
+              gridScale={0.1}
+              lineJitter={0.06}
+              scanColor="#D4A017"
+              scanOpacity={0.45}
+              scanGlow={0.65}
+              scanDuration={3}
+              scanDelay={1.4}
+              enablePost={false}
+              noiseIntensity={0.006}
+            />
+          </div>
           <AssistantChat />
         </motion.div>
       </div>

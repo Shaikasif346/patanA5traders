@@ -194,7 +194,9 @@ function Hero() {
           <p className="mb-5 inline-flex rounded-full border border-gold-300/40 bg-white/10 px-4 py-2 text-sm font-bold uppercase tracking-[0.18em] text-gold-300 backdrop-blur">
             {company.businessType}
           </p>
-          <h1 className="font-display text-5xl font-bold leading-tight md:text-7xl">{company.displayName}</h1>
+          <h1 className="hero-title-3d font-display text-5xl font-bold leading-tight md:text-7xl">
+            {company.displayName}
+          </h1>
           <p className="mt-5 text-2xl font-semibold text-gold-300">{company.tagline}</p>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-100">{company.description}</p>
           <div className="mt-7 grid max-w-2xl gap-3 sm:grid-cols-3">

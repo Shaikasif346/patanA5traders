@@ -1,5 +1,5 @@
 import { SiteClient } from "@/components/site-client";
-import { company, products, services } from "@/data/site";
+import { company, services } from "@/data/site";
 
 export default function Home() {
   const schema = {
@@ -18,16 +18,6 @@ export default function Home() {
       addressCountry: "IN"
     },
     sameAs: [company.linkedin],
-    makesOffer: products.map((product) => ({
-      "@type": "Offer",
-      itemOffered: {
-        "@type": "Product",
-        name: product.name,
-        category: product.category,
-        description: product.description,
-        countryOfOrigin: "India"
-      }
-    })),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Import Export Services",

@@ -28,7 +28,7 @@ export const company = {
   description:
     "PatanA5Traders is a trusted Indian Import & Export company specializing in sourcing, supplying, and delivering high-quality products to international markets with reliability, transparency, and customer satisfaction.",
   businessType: "Proprietorship",
-  email: "patansubhani78905@gmail.com",
+  email: "info@patana5traders.com",
   phone: "8977574355",
   whatsapp: "8977574355",
   address: "Kadapa District, Andhra Pradesh, India",

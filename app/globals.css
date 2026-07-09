@@ -4,7 +4,7 @@
 
 :root {
   color-scheme: light;
-  --background: #f8fafc;
+  --background: #f6f8fb;
   --foreground: #071a33;
 }
 
@@ -27,6 +27,8 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-inter), Inter, system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 button,
@@ -51,12 +53,50 @@ textarea {
 }
 
 .gold-line {
-  width: 72px;
+  width: 88px;
   height: 3px;
   border-radius: 999px;
-  background: linear-gradient(90deg, #d4a017, #f6d36b);
+  background: linear-gradient(90deg, #b7860d, #f6d36b, #d4a017);
+  box-shadow: 0 8px 24px rgba(212, 160, 23, 0.28);
 }
 
 .focus-ring {
   @apply focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500;
+}
+
+.premium-panel {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.92)),
+    radial-gradient(circle at top left, rgba(212, 160, 23, 0.12), transparent 34%);
+  border: 1px solid rgba(15, 23, 42, 0.09);
+  box-shadow: 0 20px 70px rgba(4, 18, 37, 0.1);
+}
+
+.dark .premium-panel {
+  background:
+    linear-gradient(180deg, rgba(7, 26, 51, 0.96), rgba(4, 18, 37, 0.92)),
+    radial-gradient(circle at top left, rgba(246, 211, 107, 0.13), transparent 36%);
+  border-color: rgba(255, 255, 255, 0.11);
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(246, 211, 107, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(246, 211, 107, 0.08) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: linear-gradient(90deg, transparent, black 18%, black 82%, transparent);
+}
+
+.section-surface {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(212, 160, 23, 0.08), transparent 26%),
+    radial-gradient(circle at 88% 0%, rgba(18, 49, 95, 0.08), transparent 30%),
+    #f6f8fb;
+}
+
+.dark .section-surface {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(246, 211, 107, 0.1), transparent 28%),
+    radial-gradient(circle at 88% 0%, rgba(55, 108, 176, 0.12), transparent 32%),
+    #071a33;
 }

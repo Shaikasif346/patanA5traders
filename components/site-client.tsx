@@ -87,7 +87,7 @@ function Header() {
   }
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/20 bg-white/88 shadow-sm backdrop-blur-xl dark:border-white/10 dark:bg-navy-950/88">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/20 bg-white/95 shadow-premium backdrop-blur-xl dark:border-white/10 dark:bg-navy-950/95">
       <div className="container flex h-20 items-center justify-between">
         <a href="#home" className="focus-ring rounded-full">
           <Logo />
@@ -114,7 +114,7 @@ function Header() {
           </button>
           <a
             href="#contact"
-            className="focus-ring inline-flex items-center gap-2 rounded-full bg-gold-500 px-5 py-3 text-sm font-bold text-navy-950 shadow-gold transition hover:bg-gold-300"
+            className="focus-ring inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-300 px-5 py-3 text-sm font-bold text-navy-950 shadow-gold transition hover:shadow-gold"
           >
             <Send className="h-4 w-4" />
             Request Quote
@@ -154,7 +154,7 @@ function Header() {
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="focus-ring inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gold-500 px-4 py-3 font-bold text-navy-950"
+                className="focus-ring inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-300 px-4 py-3 font-bold text-navy-950"
               >
                 <Send className="h-5 w-5" />
                 Quote
@@ -178,8 +178,10 @@ function Hero() {
         className="object-cover opacity-40"
         sizes="100vw"
       />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,18,37,0.94),rgba(4,18,37,0.72),rgba(4,18,37,0.26))]" />
-      <div className="absolute inset-y-20 right-0 hidden w-[56vw] xl:block">
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,18,37,0.96),rgba(4,18,37,0.78),rgba(4,18,37,0.32))]" />
+      <div className="hero-grid absolute inset-0 opacity-70" />
+      <div className="absolute -right-24 top-24 hidden h-[620px] w-[620px] rounded-full border border-gold-300/20 bg-gold-300/10 blur-3xl xl:block" />
+      <div className="absolute inset-y-20 right-0 hidden w-[58vw] xl:block">
         <TradeScene />
       </div>
       <div className="container relative grid min-h-[calc(92vh-80px)] items-center gap-10 py-16 xl:grid-cols-[0.92fr_1.08fr]">
@@ -195,10 +197,17 @@ function Hero() {
           <h1 className="font-display text-5xl font-bold leading-tight md:text-7xl">{company.displayName}</h1>
           <p className="mt-5 text-2xl font-semibold text-gold-300">{company.tagline}</p>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-100">{company.description}</p>
+          <div className="mt-7 grid max-w-2xl gap-3 sm:grid-cols-3">
+            {["Verified Sourcing", "Global Logistics", "Made in India"].map((item) => (
+              <div key={item} className="rounded-[8px] border border-white/15 bg-white/10 px-4 py-3 text-sm font-bold text-slate-100 backdrop-blur">
+                {item}
+              </div>
+            ))}
+          </div>
           <div className="mt-9 flex flex-col gap-4 sm:flex-row">
             <a
               href="#contact"
-              className="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-gold-500 px-7 py-4 font-bold text-navy-950 shadow-gold transition hover:bg-gold-300"
+              className="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-300 px-7 py-4 font-bold text-navy-950 shadow-gold transition hover:shadow-gold"
             >
               <Send className="h-5 w-5" />
               Request Quotation
@@ -212,7 +221,7 @@ function Hero() {
             </a>
           </div>
         </motion.div>
-        <div className="min-h-[420px] xl:hidden">
+        <div className="min-h-[420px] rounded-[8px] border border-white/10 bg-white/5 xl:hidden">
           <TradeScene />
         </div>
       </div>
@@ -263,7 +272,7 @@ function About() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="rounded-[8px] border border-slate-200 bg-slate-50 p-5 dark:border-white/10 dark:bg-white/5"
+                className="premium-panel rounded-[8px] p-5 dark:border-white/10 dark:bg-white/5"
               >
                 <Icon className="mb-4 h-7 w-7 text-gold-500" />
                 <h3 className="font-bold text-navy-900 dark:text-white">{title}</h3>
@@ -281,7 +290,7 @@ function About() {
               "Customer satisfaction"
             ].map((item) => (
               <span key={item} className="flex items-center gap-2">
-                <span className="h-2 w-2 rounded-full bg-gold-500" />
+                <span className="h-2 w-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-300" />
                 {item}
               </span>
             ))}
@@ -303,7 +312,7 @@ function Products() {
   });
 
   return (
-    <section id="products" className="section bg-slate-50 dark:bg-navy-900">
+    <section id="products" className="section section-surface dark:bg-navy-900">
       <div className="container">
         <SectionIntro
           eyebrow="Product Categories"
@@ -341,7 +350,7 @@ function Products() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="overflow-hidden rounded-[8px] border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-premium dark:border-white/10 dark:bg-navy-950"
+              className="overflow-hidden rounded-[8px] premium-panel transition duration-300 hover:-translate-y-2 hover:shadow-premium dark:border-white/10 dark:bg-navy-950"
             >
               <div className="relative h-56">
                 <Image
@@ -373,7 +382,7 @@ function Products() {
                     <ul className="mt-2 space-y-1">
                       {product.specs.map((spec) => (
                         <li key={spec} className="flex gap-2">
-                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gold-500" />
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-r from-gold-500 to-gold-300" />
                           {spec}
                         </li>
                       ))}
@@ -406,7 +415,7 @@ function Services() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true }}
-              className="rounded-[8px] border border-slate-200 bg-slate-50 p-5 dark:border-white/10 dark:bg-white/5"
+              className="premium-panel rounded-[8px] p-5 dark:border-white/10 dark:bg-white/5"
             >
               <Icon className="mb-4 h-7 w-7 text-gold-500" />
               <h3 className="font-bold text-navy-900 dark:text-white">{title}</h3>
@@ -443,11 +452,12 @@ function CountUp({ value }: { value: string }) {
 function TrustSections() {
   return (
     <>
-      <section className="section bg-navy-950 text-white">
+      <section className="section relative overflow-hidden bg-navy-950 text-white">
+        <div className="hero-grid absolute inset-0 opacity-40" />
         <div className="container">
           <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-6">
             {stats.map(([value, label]) => (
-              <div key={label} className="rounded-[8px] border border-white/10 bg-white/5 p-5 text-center">
+              <div key={label} className="relative rounded-[8px] border border-white/10 bg-white/10 p-5 text-center shadow-premium backdrop-blur">
                 <p className="font-display text-4xl font-bold text-gold-300">
                   <CountUp value={value} />
                 </p>
@@ -457,7 +467,7 @@ function TrustSections() {
           </div>
         </div>
       </section>
-      <section className="section bg-slate-50 dark:bg-navy-900">
+      <section className="section section-surface dark:bg-navy-900">
         <div className="container grid gap-12 lg:grid-cols-2">
           <div>
             <SectionIntro
@@ -469,7 +479,7 @@ function TrustSections() {
               {chooseUs.map((item) => (
                 <div
                   key={item}
-                  className="rounded-[8px] border border-slate-200 bg-white p-4 font-semibold text-slate-700 dark:border-white/10 dark:bg-navy-950 dark:text-slate-200"
+                  className="rounded-[8px] premium-panel p-4 font-semibold text-slate-700 dark:border-white/10 dark:bg-navy-950 dark:text-slate-200"
                 >
                   <span className="mr-2 text-gold-500">✓</span>
                   {item}
@@ -483,7 +493,7 @@ function TrustSections() {
               {certifications.map((item) => (
                 <div
                   key={item}
-                  className="rounded-[8px] border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-navy-950"
+                  className="rounded-[8px] premium-panel p-5 dark:border-white/10 dark:bg-navy-950"
                 >
                   <p className="text-sm font-bold uppercase tracking-[0.16em] text-gold-600 dark:text-gold-300">
                     Certificate
@@ -535,9 +545,9 @@ function MarketsAndProcess() {
               {process.map((step, index) => (
                 <div
                   key={step}
-                  className="flex items-center gap-4 rounded-[8px] border border-slate-200 bg-slate-50 p-4 dark:border-white/10 dark:bg-white/5"
+                  className="premium-panel flex items-center gap-4 rounded-[8px] p-4 dark:border-white/10 dark:bg-white/5"
                 >
-                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gold-500 font-bold text-navy-950">
+                  <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-gradient-to-r from-gold-500 to-gold-300 font-bold text-navy-950">
                     {index + 1}
                   </span>
                   <span className="font-semibold text-slate-700 dark:text-slate-200">{step}</span>
@@ -555,7 +565,7 @@ function GalleryFaq() {
   const [open, setOpen] = useState(0);
 
   return (
-    <section className="section bg-slate-50 dark:bg-navy-900">
+    <section className="section section-surface dark:bg-navy-900">
       <div className="container">
         <SectionIntro
           eyebrow="Gallery"
@@ -616,7 +626,7 @@ function Contact() {
         />
         <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
           <form
-            className="rounded-[8px] border border-slate-200 bg-slate-50 p-6 shadow-sm dark:border-white/10 dark:bg-white/5"
+            className="premium-panel rounded-[8px] p-6 dark:border-white/10 dark:bg-white/5"
             action={`mailto:${company.email}`}
             method="post"
             encType="text/plain"
@@ -648,13 +658,13 @@ function Contact() {
               <textarea
                 name="Message"
                 rows={5}
-                className="focus-ring rounded-[8px] border border-slate-200 bg-white p-4 font-normal text-navy-900 dark:border-white/10 dark:bg-navy-950 dark:text-white"
+                className="focus-ring rounded-[8px] premium-panel p-4 font-normal text-navy-900 dark:border-white/10 dark:bg-navy-950 dark:text-white"
               />
             </label>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <button
                 type="submit"
-                className="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-gold-500 px-7 py-4 font-bold text-navy-950 shadow-gold hover:bg-gold-300"
+                className="focus-ring inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-gold-500 to-gold-300 px-7 py-4 font-bold text-navy-950 shadow-gold hover:bg-gold-300"
               >
                 <Mail className="h-5 w-5" />
                 Submit Inquiry
@@ -675,7 +685,7 @@ function Contact() {
                 href={href}
                 target={href.startsWith("http") ? "_blank" : undefined}
                 rel={href.startsWith("http") ? "noreferrer" : undefined}
-                className="focus-ring flex items-center gap-4 rounded-[8px] border border-slate-200 bg-slate-50 p-5 transition hover:border-gold-300 dark:border-white/10 dark:bg-white/5"
+                className="focus-ring premium-panel flex items-center gap-4 rounded-[8px] p-5 transition hover:-translate-y-1 hover:border-gold-300 dark:border-white/10 dark:bg-white/5"
               >
                 <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-navy-900 text-gold-300">
                   <Icon className="h-6 w-6" />
@@ -705,7 +715,7 @@ function Contact() {
 
 function BusinessCardSection() {
   return (
-    <section className="section bg-slate-50 dark:bg-navy-900" aria-labelledby="business-card-title">
+    <section className="section section-surface dark:bg-navy-900" aria-labelledby="business-card-title">
       <div className="container">
         <SectionIntro
           eyebrow="Business Card"
@@ -798,7 +808,7 @@ function FloatingActions() {
       </a>
       <a
         href={`tel:+91${company.phone}`}
-        className="focus-ring grid h-14 w-14 place-items-center rounded-full bg-gold-500 text-navy-950 shadow-lg"
+        className="focus-ring grid h-14 w-14 place-items-center rounded-full bg-gradient-to-r from-gold-500 to-gold-300 text-navy-950 shadow-lg"
         aria-label="Call PatanA5Traders"
       >
         <Phone className="h-6 w-6" />

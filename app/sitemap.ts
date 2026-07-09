@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const baseUrl = "https://patana5traders.com";
+const baseUrl = "https://www.patana5traders.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return ["", "/privacy-policy", "/terms-and-conditions", "/cookie-policy", "/disclaimer"].map((path) => ({

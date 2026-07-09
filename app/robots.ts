@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/"
     },
-    sitemap: "https://patana5traders.com/sitemap.xml"
+    sitemap: "https://www.patana5traders.com/sitemap.xml"
   };
 }

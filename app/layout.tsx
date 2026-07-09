@@ -11,7 +11,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://patana5traders.com"),
+  metadataBase: new URL("https://www.patana5traders.com"),
   title: {
     default: "PatanA5Traders | Import & Export Company in India",
     template: "%s | PatanA5Traders"
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "PatanA5Traders - Connecting India to Global Markets",
     description: company.description,
-    url: "https://patana5traders.com",
+    url: "https://www.patana5traders.com",
     siteName: company.name,
     locale: "en_IN",
     type: "website"

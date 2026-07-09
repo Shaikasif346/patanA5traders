@@ -8,7 +8,7 @@ export default function Home() {
     name: company.name,
     legalName: company.name,
     description: company.description,
-    url: "https://patana5traders.com",
+    url: "https://www.patana5traders.com",
     email: company.email,
     telephone: `+91${company.phone}`,
     address: {
